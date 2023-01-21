@@ -1,0 +1,6 @@
+package com.example.tpcoursapi
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
