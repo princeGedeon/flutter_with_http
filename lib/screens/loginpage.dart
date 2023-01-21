@@ -1,12 +1,19 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_validator/form_validator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tpcoursapi/screens/registerpage.dart';
 
 import '../components/app_button_round.dart';
 import '../components/app_inputv2.dart';
 import '../components/app_text.dart';
+import '../data/models/AuthenticatedUser.dart';
+import '../data/services/users_service.dart';
 import '../utils/app_func.dart';
-import '../utils/app_styles.dart';
+import '../utils/constants.dart';
+import 'homepage.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -18,6 +25,43 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late TextEditingController identifierController;
   late TextEditingController passController;
+  bool isLoading=false;
+
+  _login(email, password) async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      AuthenticatedUser authenticatedUser = await UserService.authentication({
+        'strategy':'local',
+        'email':email,
+        'password': password
+      });
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString(Constant.USERNAME_PREF_KEY, authenticatedUser.user!.username!);
+      prefs.setString(Constant.EMAIL_PREF_KEY, authenticatedUser.user!.email!);
+      prefs.setString(Constant.USER_ID_PREF_KEY, authenticatedUser.user!.id!);
+      prefs.setString(Constant.TOKEN_PREF_KEY, authenticatedUser.accessToken!);
+      identifierController.text = "";
+      passController.text = "";
+      Fluttertoast.showToast(msg: "Connexion effectuée avec succès");
+
+navigateToNextPage(context, HomeScreen(),back: false);
+     // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    } on DioError catch (e) {
+      Map<String, dynamic> error = e.response?.data;
+      if (error != null && error.containsKey('message')) {
+        Fluttertoast.showToast(msg: error['message']);
+      } else {
+        Fluttertoast.showToast(msg: "Une erreur est survenue veuillez rééssayer");
+      }
+      print(e.response);
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -95,6 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                           print("Créer un compte");
                           //navigateToNextPage(context, PasswordChangePage(),);
+
                         },
                         child: AppText(
                           "Mot de passe oublié",
@@ -115,14 +160,16 @@ class _LoginPageState extends State<LoginPage> {
   Form connectForm(){
     return Form(child: Column(
       children: [
-        AppInputv2(controller: identifierController, validationBuilder: ValidationBuilder(requiredMessage: "Veuillez entrez vos identifiants"),),
+        AppInputv2(controller: identifierController,inputType: TextInputType.emailAddress, validationBuilder: ValidationBuilder(requiredMessage: "Veuillez entrez vos identifiants"),),
         SizedBox(height: 5,),
         AppInputv2(controller: passController, validationBuilder: ValidationBuilder(requiredMessage: "Veuillez entre votre mots de passe",)),
 
         SizedBox(height: 15,),
-        AppButtonRound("Se connecter",textColor: getPrimaryColor(context),onTap: (){
+        AppButtonRound("Se connecter",textColor: Colors.white,backgroundColor: Colors.greenAccent,onTap: () async{
           print(identifierController.text);
           print(passController.text);
+
+          await _login(identifierController.text, passController.text);
 
 
 

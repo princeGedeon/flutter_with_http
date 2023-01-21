@@ -1,10 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:form_validator/form_validator.dart';
 
 import '../components/app_button_v2.dart';
 import '../components/app_inputv2.dart';
 import '../components/app_text.dart';
+import '../data/services/users_service.dart';
 import '../utils/app_func.dart';
 import '../utils/app_styles.dart';
 import 'loginpage.dart';
@@ -25,6 +28,37 @@ class _RegisterPageState extends  State<RegisterPage>{
   late TextEditingController mailController;
   late TextEditingController pass1Controller;
   late TextEditingController pass2Controller;
+
+
+
+  bool isLoading = false;
+
+  _register(email, username, password) async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      var result = await UserService.create({
+        'username':username,
+        'email':email,
+        'password': password
+      });
+      Fluttertoast.showToast(msg: "Utilisateur créé avec succès");
+      navigateToNextPage(context, LoginPage());
+    } on DioError catch (e) {
+      Map<String, dynamic> error = e.response?.data;
+      if (error != null && error.containsKey('message')) {
+        Fluttertoast.showToast(msg: error['message']);
+      } else {
+        Fluttertoast.showToast(msg: "Une erreur est survenue veuillez rééssayer");
+      }
+      print(e.response);
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
   @override
   void initState() {
     super.initState();
@@ -47,7 +81,7 @@ class _RegisterPageState extends  State<RegisterPage>{
 
   bool isShown = false;
   final _formKey = GlobalKey<FormState>();
-  bool isLoading = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -190,13 +224,18 @@ class _RegisterPageState extends  State<RegisterPage>{
 
   void connection() async {
     if (_formKey.currentState!.validate()) {
-      setState(() {
-        isLoading = true;
-      });
-      print(mailController.text);
-      print(pass1Controller.text);
-      print(pass2Controller.text);
-      print(nomController.text);
+
+
+      if (pass1Controller.text==pass2Controller.text){
+        print('hi');
+        await _register(mailController.text, nomController.text, pass1Controller.text);
+
+      }
+      else{
+
+      }
+
+
 
     } else {
 
