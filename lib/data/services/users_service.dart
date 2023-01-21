@@ -1,4 +1,4 @@
-import 'package:blog/data/models/AuthenticatedUser.dart';
+import '../../../data/models/AuthenticatedUser.dart';
 
 import '../../utils/constants.dart';
 import 'package:dio/dio.dart';

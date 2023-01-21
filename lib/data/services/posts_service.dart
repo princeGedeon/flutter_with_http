@@ -1,10 +1,10 @@
-import 'package:blog/data/models/post.dart';
+
 
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utils/constants.dart';
-
+import '../../../data/models/post.dart';
 class PostService {
 
   static Future<Post> create (data) async {

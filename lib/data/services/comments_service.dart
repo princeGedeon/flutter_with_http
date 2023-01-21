@@ -1,4 +1,4 @@
-import 'package:blog/data/models/comment.dart';
+import '../../../data/models/comment.dart';
 
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
