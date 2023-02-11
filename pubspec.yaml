@@ -41,6 +41,9 @@ dependencies:
   fluttertoast:
   shared_preferences:
   google_fonts:
+  sqflite: ^2.2.0+3
+  path_provider: ^2.0.11
+  image_picker: ^0.8.6
   form_validator:
 
 dev_dependencies:
