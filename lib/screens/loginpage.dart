@@ -8,6 +8,7 @@ import 'package:tpcoursapi/screens/registerpage.dart';
 import '../components/app_button_round.dart';
 import '../components/app_inputv2.dart';
 import '../components/app_text.dart';
+import '../controller/app_controller.dart';
 import '../data/models/AuthenticatedUser.dart';
 import '../data/services/users_service.dart';
 import '../utils/app_func.dart';
@@ -46,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
       passController.text = "";
       Fluttertoast.showToast(msg: "Connexion effectuée avec succès");
 
-navigateToNextPage(context, HomeScreen(),back: false);
+navigateToNextPage(context, AppController(),back: false);
      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
     } on DioError catch (e) {
       Map<String, dynamic> error = e.response?.data;
