@@ -5,6 +5,8 @@ import 'package:tpcoursapi/data/models/todo.dart';
 import 'package:tpcoursapi/screens/addTodo.dart';
 import 'package:tpcoursapi/utils/app_func.dart';
 
+import '../data/services/DatabaseClient.dart';
+
 class TodoListSql extends StatefulWidget {
   const TodoListSql({Key? key}) : super(key: key);
 
@@ -14,6 +16,14 @@ class TodoListSql extends StatefulWidget {
 
 class _TodoListSqlState extends State<TodoListSql> {
   List<Todo> todos=[];
+  @override
+  void initState() {
+    // TODO: implement initState
+    getTodo();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -29,10 +39,10 @@ class _TodoListSqlState extends State<TodoListSql> {
               height: MediaQuery.of(context).size.height*0.8,
 
                 child: ListView.separated(itemBuilder: (BuildContext context,index){
-                  return TodoTile(item: Todo(id:1, title: 'Test', description: '', priority: '', deadline_at: ''), onDelete: (Todo ) {  }, onPressed: (Todo ) {  },);
+                  return TodoTile(item: todos[index], onDelete: (Todo ) {  }, onPressed: (Todo ) {  },);
                 }, separatorBuilder: (BuildContext context,index){
                   return Divider();
-                }, itemCount: 8)
+                }, itemCount: todos.length)
 
               ),
 
@@ -49,4 +59,17 @@ class _TodoListSqlState extends State<TodoListSql> {
       ),
     );
   }
+
+
+  getTodo() async{
+    DatabaseClient().allTodos().then((value){
+      print(value);
+      setState(() {
+        this.todos=value;
+      });
+
+
+    });
+  }
+
 }

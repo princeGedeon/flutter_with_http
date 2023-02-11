@@ -34,7 +34,7 @@ class DatabaseClient{
       id INTEGER PRIMARY KEY,
       title TEXT NOT NULL,
       priority TEXT NOT NULL,
-      deadline_at TEXT NOT NULL,);
+      deadline_at TEXT NOT NULL);
     ''');
 
 
