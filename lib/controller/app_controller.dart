@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tpcoursapi/screens/ProfilPage.dart';
+import 'package:tpcoursapi/screens/TodoListApi.dart';
 
 import '../data/models/Menu_items.dart';
+import '../screens/AProposPage.dart';
+import '../screens/TodoListSql.dart';
+import '../screens/homepage.dart';
 
 class AppController extends StatefulWidget{
 
@@ -13,10 +18,11 @@ class AppState extends State<AppController> {
   //Parametre
   int index=0;
   List<Menu_Item > Items=[
-    Menu_Item(name: "Home", icon:Icon(Icons.access_alarms_rounded),body:Container()),
-    Menu_Item(name: "Mes Todos",icon: Icon(Icons.keyboard_option_key), body: Container(child:Container(),)),
-    Menu_Item(name: "Mon profil", icon: Icon(Icons.accessible_forward), body: Container(child: Text("Forum"),)),
-    Menu_Item(name: "A propos", icon: Icon(Icons.keyboard_option_key), body: Container(child: Text("mon_profil"),)),
+    Menu_Item(name: "Home", icon:Icon(Icons.access_alarms_rounded),body:HomeScreen()),
+    Menu_Item(name: "Mes Todos",icon: Icon(Icons.keyboard_option_key), body: TodoListAPI()),
+    Menu_Item(name: "Mes Todos hors-ligne",icon: Icon(Icons.keyboard_option_key), body: Container(child:TodoListSql(),)),
+    Menu_Item(name: "Mon profil", icon: Icon(Icons.accessible_forward), body:ProfilPage()),
+    Menu_Item(name: "A propos", icon: Icon(Icons.keyboard_option_key), body:AProposPage()),
   ];
 
   @override
@@ -35,13 +41,13 @@ class AppState extends State<AppController> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color(0xE5E5E5),
+        backgroundColor:Colors.blueAccent,
       ),
       drawer: Drawer(
         child: ListView.builder(itemBuilder: (context,index){
           return (index==0)?drawerHeader():tileFromIndex(index);
         },
-          itemCount: 6,),
+          itemCount: Items.length+1,),
 
       ),
       body: Items[index].body,
@@ -50,12 +56,17 @@ class AppState extends State<AppController> {
 
   DrawerHeader drawerHeader(){
     return DrawerHeader(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Icon(Icons.book),
-          Text("Todo of Prince")
-        ],
+      child: Container(
+        color: Colors.blueAccent,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+           CircleAvatar(
+             child:  Icon(Icons.book),
+           ),
+            Text("Todo of Prince")
+          ],
+        ),
       ),
     );
   }

@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
       passController.text = "";
       Fluttertoast.showToast(msg: "Connexion effectuée avec succès");
 
-navigateToNextPage(context, AppController(),back: false);
+  navigateToNextPage(context, AppController(),back: false);
      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
     } on DioError catch (e) {
       Map<String, dynamic> error = e.response?.data;
