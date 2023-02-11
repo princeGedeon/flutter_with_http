@@ -165,7 +165,7 @@ navigateToNextPage(context, HomeScreen(),back: false);
         AppInputv2(controller: passController, validationBuilder: ValidationBuilder(requiredMessage: "Veuillez entre votre mots de passe",)),
 
         SizedBox(height: 15,),
-        AppButtonRound("Se connecter",textColor: Colors.white,backgroundColor: Colors.greenAccent,onTap: () async{
+        AppButtonRound("Connexion",textColor: Colors.white,backgroundColor: Colors.greenAccent,onTap: () async{
           print(identifierController.text);
           print(passController.text);
 
