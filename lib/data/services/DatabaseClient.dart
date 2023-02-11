@@ -47,6 +47,7 @@ class DatabaseClient{
     const query="SELECT * FROM Todo";
 
     List<Map<String,dynamic>> mapList= await db.rawQuery(query);
+    print(mapList);
     return mapList.map((e) => Todo.fromJson(e)).toList();
   }
 

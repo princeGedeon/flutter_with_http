@@ -114,11 +114,12 @@ class _AddTodoViewState extends State<AddTodoView> {
     Map<String,dynamic> map={
 
     };
+    Random random = new Random();
     map["title"]=titleController.text;
     map["description"]=descriptionController.text;
     map["priority"]=priotity.text;
     map["deadline_at"]="";
-    map["id"]=1;
+    map["id"]=random.nextInt(100);
 
 
 
