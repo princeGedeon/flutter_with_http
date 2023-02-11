@@ -128,7 +128,8 @@ class _AddTodoViewState extends State<AddTodoView> {
     print(map);
     Todo todo=Todo.fromJson(map);
     print("h");
-    DatabaseClient().upsert(todo).then((value) => Navigator.of(context).pop());
+    DatabaseClient().addTodoList(todo).then((value) => Navigator.of(context).pop());
+   // DatabaseClient().upsert(todo).then((value) => Navigator.of(context).pop());
 
     print("f");
 
