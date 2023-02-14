@@ -1,5 +1,5 @@
 class Constant{
-  static  final BASE_URL="http://192.168.43.94:3030/";
+  static  final BASE_URL="http://192.168.56.1:3030/";
 
 
 
