@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:tpcoursapi/components/app_button_round.dart';
 import 'package:tpcoursapi/components/app_inputv2.dart';
 import 'package:tpcoursapi/data/services/todoService.dart';
+import 'package:tpcoursapi/screens/TodoListApi.dart';
 import 'package:tpcoursapi/utils/app_func.dart';
 
 import '../data/models/todo.dart';
@@ -105,9 +106,12 @@ class _AddTodoViewState extends State<AddTodoView> {
                       SizedBox(
                         height: 15,
                       ),
-                      AppButtonRound(
-                        'Creer une tache',
-                        onTap: addPressed,
+                      ElevatedButton(
+
+                         onPressed: (){
+                           print("hi");
+                           addPressed();
+                         }, child: Text("Creer une tache"),
                       )
                     ],
                   ),
@@ -138,7 +142,7 @@ class _AddTodoViewState extends State<AddTodoView> {
     map["description"] = descriptionController.text;
     map["priority"] = priotity.text;
     map["deadline_at"] = "";
-    map["id"] = random.nextInt(100);
+    map["id"] = 300;
 
     //if (imagPath!=null) map["image"]=imagPath!;
 
@@ -147,6 +151,7 @@ class _AddTodoViewState extends State<AddTodoView> {
     print("h");
     ToDoService.create(map);
     DatabaseClient().upsert(todo).then((value) => Navigator.of(context).pop());
+    navigateToNextPage(context, TodoListAPI());
     print("f");
   }
 }

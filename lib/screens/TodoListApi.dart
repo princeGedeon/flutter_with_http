@@ -5,6 +5,8 @@ import 'package:tpcoursapi/data/services/todoService.dart';
 import 'package:tpcoursapi/screens/addTodo.dart';
 import 'package:tpcoursapi/utils/app_func.dart';
 
+import '../components/TodoTile.dart';
+
 class TodoListAPI extends StatefulWidget {
   const TodoListAPI({Key? key}) : super(key: key);
 
@@ -24,6 +26,9 @@ class _TodoListAPIState extends State<TodoListAPI> {
 
   void fetch() async {
     myTasks = await ToDoService.fetch();
+    setState(() {
+
+    });
     print("TAILLE : ${myTasks.length}");
   }
 
@@ -36,11 +41,10 @@ class _TodoListAPIState extends State<TodoListAPI> {
       }),
       body: ListView.builder(
         itemBuilder: (context, index) {
-          return ListTile(
-            title: AppText("Concert de 1PLIKE"),
-          );
-        },
-        itemCount: 4,
+          final Todo  item=myTasks[index];
+          return  TodoTile(item: item, onDelete: (Todo ) {  }, onPressed: (Todo ) {  },);
+        },//41171075
+        itemCount: myTasks.length,
       ),
     );
   }
