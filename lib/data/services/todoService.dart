@@ -10,6 +10,7 @@ class ToDoService {
     final prefs = await SharedPreferences.getInstance();
     final String token = prefs.getString(Constant.TOKEN_PREF_KEY) ?? '';
     print('je vais inserer');
+    print(Constant.TOKEN_PREF_KEY);
     var response = await Dio().post(Constant.BASE_URL + 'todos',
         data: data,
         options: Options(headers: {"authorization": "Bearer $token"}));
@@ -29,9 +30,9 @@ class ToDoService {
           options: Options(headers: {"authorization": "Bearer $token"}));
       print("RÉPONSE ${response}");
     } catch (e, s) {
-    print("Exception $e");
-    print("StackTrace $s");
-  }
+      print("Exception $e");
+      print("StackTrace $s");
+    }
     if (response.data == []) {
       return [];
     } else {
