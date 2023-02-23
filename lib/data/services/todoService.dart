@@ -9,8 +9,8 @@ class ToDoService {
   static Future<Todo> create(data) async {
     final prefs = await SharedPreferences.getInstance();
     final String token = prefs.getString(Constant.TOKEN_PREF_KEY) ?? '';
-    print('je vais inserer');
-    print(Constant.TOKEN_PREF_KEY);
+    print('je vais inserer 2');
+    print("data : $data");
     var response = await Dio().post(Constant.BASE_URL + 'todos',
         data: data,
         options: Options(headers: {"authorization": "Bearer $token"}));

@@ -20,7 +20,7 @@ class Todo{
 
   factory Todo.fromJson(Map<String, dynamic> json) {
     return Todo(
-      id: json["id"] ,
+      id: json["id"].toString() ,
       title: json["title"],
       description: json["description"],
       priority: json["priority"],

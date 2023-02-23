@@ -88,7 +88,7 @@ class DatabaseClient{
   Future<bool> upsert(Todo todo) async{
     Database db=await database;
     (todo.id==null)?
-    todo.id=await db.insert('Todo', todo.toMap()):
+    todo.id= await db.insert('Todo', todo.toMap()).toString():
     await db.update('Todo',todo.toMap(), where:"id=?",whereArgs: [todo.id]);
 
     return true;

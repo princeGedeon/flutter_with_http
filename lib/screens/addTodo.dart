@@ -141,8 +141,8 @@ class _AddTodoViewState extends State<AddTodoView> {
     map["title"] = titleController.text;
     map["description"] = descriptionController.text;
     map["priority"] = priotity.text;
-    map["deadline_at"] = "";
-    map["id"] = 300;
+    map["deadline_at"] = "2022-12-10 12:00:00";/* 
+    map["id"] = 300; */
 
     //if (imagPath!=null) map["image"]=imagPath!;
 
