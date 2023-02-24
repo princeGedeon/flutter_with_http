@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/app_func.dart';
+
 class DetailTodo extends StatefulWidget {
   const DetailTodo({Key? key}) : super(key: key);
 
@@ -10,6 +12,14 @@ class DetailTodo extends StatefulWidget {
 class _DetailTodoState extends State<DetailTodo> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+        body: Container(
+      width: double.infinity,
+      height: getSize(context).height,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [],
+      ),
+    ));
   }
 }

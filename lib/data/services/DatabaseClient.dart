@@ -19,7 +19,7 @@ class DatabaseClient {
 
   Future<Database> createDatabase() async {
     Directory directory = await getApplicationDocumentsDirectory();
-    final path = join(directory.path, "database.db");
+    final path = join(directory.path, "databass.db");
 
     return await openDatabase(path, version: 1, onCreate: onCreate);
   }
@@ -27,7 +27,7 @@ class DatabaseClient {
   onCreate(Database database, int version) async {
     await database.execute('''
       CREATE TABLE Todo (
-      id INTEGER PRIMARY KEY AUTO_INCREMENT,
+      id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
       title TEXT NOT NULL,
       description TEXT NOT NULL,
       priority TEXT NOT NULL,
