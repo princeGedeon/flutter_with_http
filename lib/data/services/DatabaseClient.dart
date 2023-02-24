@@ -27,7 +27,7 @@ class DatabaseClient {
   onCreate(Database database, int version) async {
     await database.execute('''
       CREATE TABLE Todo (
-      id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+      id INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
       title TEXT NOT NULL,
       description TEXT NOT NULL,
       priority TEXT NOT NULL,
