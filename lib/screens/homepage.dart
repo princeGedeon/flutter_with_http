@@ -37,6 +37,28 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    int nbr_started = 0,
+        nbr_finished = 0,
+        nbr_lately_finished = 0,
+        nbr_non_started = 0;
+    for (Todo task in myTasks) {
+      if (task.begined_at != null) {
+        nbr_started++;
+
+        if (task.finished_at != null) {
+          nbr_finished++;
+          var finished = DateTime.parse(task.finished_at!);
+          var deadline = DateTime.parse(task.deadline_at);
+
+          if (finished.compareTo(deadline) > 0) {
+            nbr_lately_finished++;
+          }
+        }
+      } else {
+        nbr_non_started++;
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(title: Text("Accueil")),
       drawer: myDrawer(context),
@@ -50,147 +72,137 @@ class _HomeScreenState extends State<HomeScreen> {
       body: (!isloading)
           ? SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Center(
+                  Container(
                     child: Card(
                       color: Color.fromARGB(255, 207, 98, 134),
                       child: SizedBox(
-                        width: width * 0.8,
-                        height: 100,
-                        child: Center(
-                            child: Text("Nombre total de tâches : $nbr")),
-                      ),
+                          width: width * 0.9,
+                          child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Nombre total de tâches : "),
+                                  Card(
+                                    color: Color.fromARGB(255, 196, 194, 194),
+                                    child: Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: Text(nbr)),
+                                  )
+                                ],
+                              ))),
                     ),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Text("Tâches non commencées"),
                   Container(
-                    margin: EdgeInsets.only(top: 20),
-                    height: 50,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final Todo item = myTasks[index];
-                        if (item.begined_at == null) {
-                          print(1);
-                          return Card(
-                            color: Color.fromARGB(255, 72, 77, 117),
-                            child: SizedBox(
-                              /* 
-                        width: width * 0.4, */
-                              height: 100,
-                              child: Container(
-                                  margin: EdgeInsets.all(5),
-                                  child: Text(item.title)),
-                            ),
-                          );
-                        } else {
-                          return Container();
-                        }
-                      }, //41171075
-                      itemCount: myTasks.length,
+                    child: Card(
+                      color: Color.fromARGB(255, 207, 98, 134),
+                      child: SizedBox(
+                          width: width * 0.9,
+                          child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Tâches non commencées : "),
+                                  Card(
+                                    color: Color.fromARGB(255, 196, 194, 194),
+                                    child: Container(
+                                        padding: EdgeInsets.all(5),
+                                        child:
+                                            Text(nbr_non_started.toString())),
+                                  )
+                                ],
+                              ))),
                     ),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Text("Tâches en cours"),
                   Container(
-                    margin: EdgeInsets.only(top: 20),
-                    height: 50,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final Todo item = myTasks[index];
-                        if (item.begined_at != null &&
-                            item.finished_at == null) {
-                          print(1);
-                          return Card(
-                            color: Color.fromARGB(255, 72, 77, 117),
-                            child: SizedBox(
-                              /* 
-                        width: width * 0.4, */
-                              height: 100,
-                              child: Container(
-                                  margin: EdgeInsets.all(5),
-                                  child: Text(item.title)),
-                            ),
-                          );
-                        } else {
-                          return Container();
-                        }
-                      }, //41171075
-                      itemCount: myTasks.length,
+                    child: Card(
+                      color: Color.fromARGB(255, 207, 98, 134),
+                      child: SizedBox(
+                          width: width * 0.9,
+                          child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Tâches en cours : "),
+                                  Card(
+                                    color: Color.fromARGB(255, 196, 194, 194),
+                                    child: Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: Text(nbr_started.toString())),
+                                  )
+                                ],
+                              ))),
                     ),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Text("Tâches terminées"),
                   Container(
-                    margin: EdgeInsets.only(top: 20),
-                    height: 50,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final Todo item = myTasks[index];
-                        if (item.begined_at != null &&
-                            item.finished_at != null) {
-                          print(1);
-                          return Card(
-                            color: Color.fromARGB(255, 72, 77, 117),
-                            child: SizedBox(
-                              /* 
-                        width: width * 0.4, */
-                              height: 100,
-                              child: Container(
-                                  margin: EdgeInsets.all(5),
-                                  child: Text(item.title)),
-                            ),
-                          );
-                        } else {
-                          return Container();
-                        }
-                      }, //41171075
-                      itemCount: myTasks.length,
+                    child: Card(
+                      color: Color.fromARGB(255, 207, 98, 134),
+                      child: SizedBox(
+                          width: width * 0.9,
+                          child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Tâches achevées : "),
+                                  Card(
+                                    color: Color.fromARGB(255, 196, 194, 194),
+                                    child: Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: Text(nbr_finished.toString())),
+                                  )
+                                ],
+                              ))),
                     ),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Text("Tâches terminées avec retard"),
                   Container(
-                    margin: EdgeInsets.only(top: 20),
-                    height: 50,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final Todo item = myTasks[index];
-                        if (item.begined_at != null &&
-                            item.finished_at != null &&
-                            DateTime.parse(item.deadline_at).compareTo(
-                                    DateTime.parse(item.finished_at!)) <
-                                0) {
-                          return Card(
-                            color: Color.fromARGB(255, 72, 77, 117),
-                            child: SizedBox(
-                              /* 
-                        width: width * 0.4, */
-                              height: 100,
-                              child: Container(
-                                  margin: EdgeInsets.all(5),
-                                  child: Text(item.title)),
-                            ),
-                          );
-                        } else {
-                          return Container();
-                        }
-                      }, //41171075
-                      itemCount: myTasks.length,
+                    child: Card(
+                      color: Color.fromARGB(255, 207, 98, 134),
+                      child: SizedBox(
+                          width: width * 0.9,
+                          child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Tâches achevées en retard : "),
+                                  Card(
+                                    color: Color.fromARGB(255, 196, 194, 194),
+                                    child: Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: Text(
+                                            nbr_lately_finished.toString())),
+                                  )
+                                ],
+                              ))),
                     ),
-                  )
+                  ),
                 ],
               ),
             )

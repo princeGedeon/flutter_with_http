@@ -32,7 +32,7 @@ Drawer myDrawer(BuildContext context) => Drawer(
         Divider(),
         InkWell(
           child: ListTile(
-            leading: Icon(Icons.home),
+            leading: Icon(Icons.task_alt),
             title: Text("Mes todos"),
           ),
           onTap: (() {
@@ -42,7 +42,7 @@ Drawer myDrawer(BuildContext context) => Drawer(
         Divider(),
         InkWell(
           child: ListTile(
-            leading: Icon(Icons.home),
+            leading: Icon(Icons.task),
             title: Text("Mes todos hors-ligne"),
           ),
           onTap: (() {
@@ -52,7 +52,7 @@ Drawer myDrawer(BuildContext context) => Drawer(
         Divider(),
         InkWell(
           child: ListTile(
-            leading: Icon(Icons.home),
+            leading: Icon(Icons.info),
             title: Text("A propos"),
           ),
           onTap: (() {
