@@ -4,9 +4,11 @@ class Todo{
   String description;
   String priority;
   String deadline_at;
+  String? begined_at;
+  String? finished_at;
 
 
-  Todo({required this.id,required this.title,required this.description,required this.priority,required this.deadline_at});
+  Todo({required this.id,required this.title,required this.description,required this.priority,required this.deadline_at,  finished_at,  begined_at});
 
   Map<String, dynamic> toMap() {
     return {
@@ -15,6 +17,8 @@ class Todo{
       "description": this.description,
       "priority": this.priority,
       "deadline_at": this.deadline_at,
+      "begined_at": this.begined_at,
+      "finished_at": this.finished_at,
     };
   }
 
@@ -25,6 +29,8 @@ class Todo{
       description: json["description"],
       priority: json["priority"],
       deadline_at: json["deadline_at"],
+      begined_at: json["begined_at"],
+      finished_at: json["finished_at"],
     );
   }
 //
