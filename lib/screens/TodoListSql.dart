@@ -4,6 +4,7 @@ import 'package:tpcoursapi/components/app_text.dart';
 import 'package:tpcoursapi/data/models/todo.dart';
 import 'package:tpcoursapi/screens/addTodo.dart';
 import 'package:tpcoursapi/utils/app_func.dart';
+import 'package:tpcoursapi/utils/constants.dart';
 
 import '../data/services/DatabaseClient.dart';
 
@@ -27,6 +28,8 @@ class _TodoListSqlState extends State<TodoListSql> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      appBar: AppBar(title: Text("Accueil")),
+      drawer: myDrawer(context),
       body:Container(
         width: double.infinity,
         height: getSize(context).height,

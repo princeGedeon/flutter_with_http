@@ -19,7 +19,7 @@ class DatabaseClient {
 
   Future<Database> createDatabase() async {
     Directory directory = await getApplicationDocumentsDirectory();
-    final path = join(directory.path, "databass.db");
+    final path = join(directory.path, "databases.db");
 
     return await openDatabase(path, version: 1, onCreate: onCreate);
   }
@@ -27,11 +27,13 @@ class DatabaseClient {
   onCreate(Database database, int version) async {
     await database.execute('''
       CREATE TABLE Todo (
-      id INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
+      id INTEGER PRIMARY KEY ,
       title TEXT NOT NULL,
       description TEXT NOT NULL,
       priority TEXT NOT NULL,
-      deadline_at TEXT NOT NULL);
+      deadline_at TEXT NOT NULL,
+      begined_at TEXT,
+      finished_at TEXT );
     ''');
   }
 
@@ -60,7 +62,9 @@ class DatabaseClient {
       "title": todo.title,
       "description": todo.description,
       "priority": todo.priority,
-      "deadline_at": todo.deadline_at
+      "deadline_at": todo.deadline_at,
+      "begined_at": todo.begined_at,
+      "finished_at": todo.finished_at
     });
 
     return true;

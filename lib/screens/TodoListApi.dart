@@ -4,6 +4,7 @@ import 'package:tpcoursapi/data/models/todo.dart';
 import 'package:tpcoursapi/data/services/todoService.dart';
 import 'package:tpcoursapi/screens/addTodo.dart';
 import 'package:tpcoursapi/utils/app_func.dart';
+import 'package:tpcoursapi/utils/constants.dart';
 
 import '../components/TodoTile.dart';
 
@@ -26,24 +27,31 @@ class _TodoListAPIState extends State<TodoListAPI> {
 
   void fetch() async {
     myTasks = await ToDoService.fetch();
-    setState(() {
-
-    });
+    setState(() {});
     print("TAILLE : ${myTasks.length}");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        print("add");
-        navigateToNextPage(context, AddTodoView());
-      }),
+      appBar: AppBar(title: Text("Accueil")),
+      drawer: myDrawer(context),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print("add");
+          navigateToNextPage(context, AddTodoView());
+        },
+        child: Icon(Icons.add),
+      ),
       body: ListView.builder(
         itemBuilder: (context, index) {
-          final Todo  item=myTasks[index];
-          return  TodoTile(item: item, onDelete: (Todo ) {  }, onPressed: (Todo ) {  },);
-        },//41171075
+          final Todo item = myTasks[index];
+          return TodoTile(
+            item: item,
+            onDelete: (Todo) {},
+            onPressed: (Todo) {},
+          );
+        }, //41171075
         itemCount: myTasks.length,
       ),
     );

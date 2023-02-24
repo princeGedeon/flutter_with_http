@@ -8,6 +8,7 @@ import 'package:tpcoursapi/components/app_inputv2.dart';
 import 'package:tpcoursapi/data/services/todoService.dart';
 import 'package:tpcoursapi/screens/TodoListApi.dart';
 import 'package:tpcoursapi/utils/app_func.dart';
+import 'package:tpcoursapi/utils/constants.dart';
 
 import '../data/models/todo.dart';
 import '../data/services/DatabaseClient.dart';
@@ -45,6 +46,8 @@ class _AddTodoViewState extends State<AddTodoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("Accueil")),
+      drawer: myDrawer(context),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -84,10 +87,12 @@ class _AddTodoViewState extends State<AddTodoView> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             IconButton(
-                                onPressed: () => takePicture(ImageSource.camera),
+                                onPressed: () =>
+                                    takePicture(ImageSource.camera),
                                 icon: Icon(Icons.camera_alt)),
                             IconButton(
-                                onPressed: () => takePicture(ImageSource.gallery),
+                                onPressed: () =>
+                                    takePicture(ImageSource.gallery),
                                 icon: Icon(Icons.photo_library_outlined))
                           ],
                         ),
@@ -108,11 +113,11 @@ class _AddTodoViewState extends State<AddTodoView> {
                           height: 15,
                         ),
                         ElevatedButton(
-        
-                           onPressed: (){
-                             print("hi");
-                             addPressed();
-                           }, child: Text("Creer une tache"),
+                          onPressed: () {
+                            print("hi");
+                            addPressed();
+                          },
+                          child: Text("Creer une tache"),
                         )
                       ],
                     ),
@@ -151,7 +156,9 @@ class _AddTodoViewState extends State<AddTodoView> {
     Todo todo = Todo.fromJson(map);
     print("h");
     ToDoService.create(map);
-    //DatabaseClient().upsert(todo).then((value) => Navigator.of(context).pop());
+    DatabaseClient()
+        .addTodoList(todo)
+        .then((value) => Navigator.of(context).pop());
     navigateToNextPage(context, TodoListAPI());
     print("f");
   }

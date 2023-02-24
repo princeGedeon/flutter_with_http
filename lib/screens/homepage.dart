@@ -5,6 +5,7 @@ import 'package:tpcoursapi/data/models/todo.dart';
 import 'package:tpcoursapi/data/services/todoService.dart';
 import 'package:tpcoursapi/screens/addTodo.dart';
 import 'package:tpcoursapi/utils/app_func.dart';
+import 'package:tpcoursapi/utils/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -37,10 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        print("add");
-        navigateToNextPage(context, AddTodoView());
-      }),
+      appBar: AppBar(title: Text("Accueil")),
+      drawer: myDrawer(context),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print("add");
+          navigateToNextPage(context, AddTodoView());
+        },
+        child: Icon(Icons.add),
+      ),
       body: (!isloading)
           ? SingleChildScrollView(
               child: Column(
