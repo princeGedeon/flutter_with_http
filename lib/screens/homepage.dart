@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   final Todo item = myTasks[index];
-                  if (item.begined_at != null && item.finished_at==null) {
+                  if (item.begined_at != null && item.finished_at == null) {
                     print(1);
                     return Card(
                       color: Color.fromARGB(255, 72, 77, 117),
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   final Todo item = myTasks[index];
-                  if (item.begined_at != null && item.finished_at!=null) {
+                  if (item.begined_at != null && item.finished_at != null) {
                     print(1);
                     return Card(
                       color: Color.fromARGB(255, 72, 77, 117),
@@ -147,9 +147,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   final Todo item = myTasks[index];
-                  DateTime.parse(my)
-                  if (item.begined_at != null) {
-                    print(1);
+                  if (item.begined_at != null &&
+                      item.finished_at != null &&
+                      DateTime.parse(item.deadline_at)
+                              .compareTo(DateTime.parse(item.finished_at!)) <
+                          0) {
                     return Card(
                       color: Color.fromARGB(255, 72, 77, 117),
                       child: SizedBox(
