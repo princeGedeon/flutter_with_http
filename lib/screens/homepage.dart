@@ -11,9 +11,23 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return  Center(
-        child: Text("Hello"),
-      );
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return  Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Card(
+              color: Colors.pink,
+              child: SizedBox(
+                width: width*0.8,
+                height: 200,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
 
   }
 }
