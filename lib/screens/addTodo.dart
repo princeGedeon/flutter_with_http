@@ -144,7 +144,6 @@ class _AddTodoViewState extends State<AddTodoView> {
     map["description"] = descriptionController.text;
     map["priority"] = priotity.text;
     map["deadline_at"] = "2022-12-10 12:00:00";
-    map["id"] = 300;
 
     //if (imagPath!=null) map["image"]=imagPath!;
 
@@ -152,7 +151,7 @@ class _AddTodoViewState extends State<AddTodoView> {
     Todo todo = Todo.fromJson(map);
     print("h");
     ToDoService.create(map);
-    DatabaseClient().upsert(todo).then((value) => Navigator.of(context).pop());
+    //DatabaseClient().upsert(todo).then((value) => Navigator.of(context).pop());
     navigateToNextPage(context, TodoListAPI());
     print("f");
   }
