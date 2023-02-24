@@ -71,139 +71,144 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: (!isloading)
           ? SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    child: Card(
-                      color: Color.fromARGB(255, 207, 98, 134),
-                      child: SizedBox(
-                          width: width * 0.9,
-                          child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("Nombre total de tâches : "),
-                                  Card(
-                                    color: Color.fromARGB(255, 196, 194, 194),
-                                    child: Container(
-                                        padding: EdgeInsets.all(5),
-                                        child: Text(nbr)),
-                                  )
-                                ],
-                              ))),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    child: Card(
-                      color: Color.fromARGB(255, 207, 98, 134),
-                      child: SizedBox(
-                          width: width * 0.9,
-                          child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("Tâches non commencées : "),
-                                  Card(
-                                    color: Color.fromARGB(255, 196, 194, 194),
-                                    child: Container(
-                                        padding: EdgeInsets.all(5),
-                                        child:
-                                            Text(nbr_non_started.toString())),
-                                  )
-                                ],
-                              ))),
+                    Container(
+                      child: Card(
+                        color: Colors.blue,
+                        child: SizedBox(
+                            width: width * 0.9,
+                            child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Nombre total de tâches : "),
+                                    Card(
+                                      color: Color.fromARGB(255, 196, 194, 194),
+                                      child: Container(
+                                          padding: EdgeInsets.all(5),
+                                          child: Text(nbr)),
+                                    )
+                                  ],
+                                ))),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    child: Card(
-                      color: Color.fromARGB(255, 207, 98, 134),
-                      child: SizedBox(
-                          width: width * 0.9,
-                          child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("Tâches en cours : "),
-                                  Card(
-                                    color: Color.fromARGB(255, 196, 194, 194),
-                                    child: Container(
-                                        padding: EdgeInsets.all(5),
-                                        child: Text(nbr_started.toString())),
-                                  )
-                                ],
-                              ))),
+                    SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    child: Card(
-                      color: Color.fromARGB(255, 207, 98, 134),
-                      child: SizedBox(
-                          width: width * 0.9,
-                          child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("Tâches achevées : "),
-                                  Card(
-                                    color: Color.fromARGB(255, 196, 194, 194),
-                                    child: Container(
-                                        padding: EdgeInsets.all(5),
-                                        child: Text(nbr_finished.toString())),
-                                  )
-                                ],
-                              ))),
+                    Container(
+                      child: Card(
+                        color: Colors.red,
+                        child: SizedBox(
+                            width: width * 0.9,
+                            child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Tâches non commencées : "),
+                                    Card(
+                                      color: Color.fromARGB(255, 196, 194, 194),
+                                      child: Container(
+                                          padding: EdgeInsets.all(5),
+                                          child:
+                                              Text(nbr_non_started.toString())),
+                                    )
+                                  ],
+                                ))),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    child: Card(
-                      color: Color.fromARGB(255, 207, 98, 134),
-                      child: SizedBox(
-                          width: width * 0.9,
-                          child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("Tâches achevées en retard : "),
-                                  Card(
-                                    color: Color.fromARGB(255, 196, 194, 194),
-                                    child: Container(
-                                        padding: EdgeInsets.all(5),
-                                        child: Text(
-                                            nbr_lately_finished.toString())),
-                                  )
-                                ],
-                              ))),
+                    SizedBox(
+                      height: 20,
                     ),
-                  ),
-                ],
+                    Container(
+                      child: Card(
+                        color: Colors.green,
+                        child: SizedBox(
+                            width: width * 0.9,
+                            child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Tâches en cours : "),
+                                    Card(
+                                      color: Color.fromARGB(255, 196, 194, 194),
+                                      child: Container(
+                                          padding: EdgeInsets.all(5),
+                                          child: Text(nbr_started.toString())),
+                                    )
+                                  ],
+                                ))),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      child: Card(
+                        color: Color.fromARGB(255, 207, 98, 134),
+                        child: SizedBox(
+                            width: width * 0.9,
+                            child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Tâches achevées : "),
+                                    Card(
+                                      color: Color.fromARGB(255, 196, 194, 194),
+                                      child: Container(
+                                          padding: EdgeInsets.all(5),
+                                          child: Text(nbr_finished.toString())),
+                                    )
+                                  ],
+                                ))),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      child: Card(
+                        color: Colors.pinkAccent,
+                        child: SizedBox(
+                            width: width * 0.9,
+                            child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Tâches achevées en retard : "),
+                                    Card(
+                                      color: Color.fromARGB(255, 196, 194, 194),
+                                      child: Container(
+                                          padding: EdgeInsets.all(5),
+                                          child: Text(
+                                              nbr_lately_finished.toString())),
+                                    )
+                                  ],
+                                ))),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
           : Center(
