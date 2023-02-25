@@ -47,6 +47,7 @@ dependencies:
   form_validator:
   smooth_page_indicator: ^1.0.1
   flutter_svg: ^1.1.6
+  flutter_datetime_picker: ^1.5.1
 
 dev_dependencies:
   flutter_test:

@@ -47,8 +47,6 @@ class _TodoListAPIState extends State<TodoListAPI> {
           final Todo item = myTasks[index];
           return TodoTile(
             item: item,
-            onDelete: (Todo) {},
-            onPressed: (Todo) {},
           );
         }, //41171075
         itemCount: myTasks.length,

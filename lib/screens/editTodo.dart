@@ -1,6 +1,4 @@
 import 'dart:math';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:tpcoursapi/components/app_inputv2.dart';
@@ -12,19 +10,19 @@ import 'package:tpcoursapi/utils/constants.dart';
 import '../data/models/todo.dart';
 import '../data/services/DatabaseClient.dart';
 
-class AddTodoView extends StatefulWidget {
-  AddTodoView({Key? key}) : super(key: key);
+class EditTodoView extends StatefulWidget {
+  EditTodoView({Key? key}) : super(key: key);
 
   @override
-  State<AddTodoView> createState() => _AddTodoViewState();
+  State<EditTodoView> createState() => _EditTodoViewState();
 }
 
-class _AddTodoViewState extends State<AddTodoView> {
+class _EditTodoViewState extends State<EditTodoView> {
   late TextEditingController titleController;
   late TextEditingController descriptionController;
   late TextEditingController priotity;
   String? imagPath;
-  String my_date = "";
+
   @override
   void initState() {
     titleController = TextEditingController();
@@ -45,7 +43,7 @@ class _AddTodoViewState extends State<AddTodoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Accueil")),
+      appBar: AppBar(title: Text("Modifiez votre tâche")),
       drawer: myDrawer(context),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -61,7 +59,7 @@ class _AddTodoViewState extends State<AddTodoView> {
                   height: 15,
                 ),
                 Text(
-                  "Ajouter une nouvelle tâche a faire",
+                  "Modifiez les informations de votre tâche",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.redAccent,
@@ -77,38 +75,20 @@ class _AddTodoViewState extends State<AddTodoView> {
                       children: [
                         AppInputv2(
                             label: "Title",
+                            initialValue: edit_title,
                             controller: titleController,
                             validationBuilder: ValidationBuilder()),
                         AppInputv2(
                             label: "Description",
+                            initialValue: edit_description,
                             maxlines: 5,
                             controller: descriptionController,
                             validationBuilder: ValidationBuilder()),
                         AppInputv2(
                             label: "priority",
+                            initialValue: edit_priority,
                             controller: priotity,
                             validationBuilder: ValidationBuilder()),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              DatePicker.showDateTimePicker(context,
-                                  showTitleActions: true,
-                                  minTime: DateTime(2018, 3, 5),
-                                  maxTime: DateTime(2019, 6, 7),
-                                  onChanged: (date) {
-                                my_date = date.toString();
-                              }, onConfirm: (date) {
-                                my_date = date.toString();
-                              },
-                                  currentTime: DateTime.now(),
-                                  locale: LocaleType.fr);
-                            },
-                            child: Text(
-                              "Choisissez votre deadline",
-                              style: TextStyle(color: Colors.blue),
-                            )),
                         SizedBox(
                           height: 15,
                         ),
@@ -118,7 +98,7 @@ class _AddTodoViewState extends State<AddTodoView> {
                             addPressed();
                           },
                           child: Text("Creer une tache"),
-                        ),
+                        )
                       ],
                     ),
                   ),
@@ -147,7 +127,7 @@ class _AddTodoViewState extends State<AddTodoView> {
     print(map);
     Todo todo = Todo.fromJson(map);
     print("h");
-    ToDoService.create(map);
+    ToDoService.patch(edit_id, map);
     DatabaseClient()
         .addTodoList(todo)
         .then((value) => Navigator.of(context).pop());

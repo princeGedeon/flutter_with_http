@@ -16,7 +16,7 @@ class TodoListSql extends StatefulWidget {
 }
 
 class _TodoListSqlState extends State<TodoListSql> {
-  List<Todo> todos=[];
+  List<Todo> todos = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -24,55 +24,58 @@ class _TodoListSqlState extends State<TodoListSql> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(title: Text("Accueil")),
       drawer: myDrawer(context),
-      body:Container(
+      body: Container(
         width: double.infinity,
         height: getSize(context).height,
         child: Column(
           children: [
-            SizedBox(height: 10,),
-            AppText("Mes todos",size: 25,),
+            SizedBox(
+              height: 10,
+            ),
+            AppText(
+              "Mes todos",
+              size: 25,
+            ),
             Divider(),
             Container(
-              height: MediaQuery.of(context).size.height*0.8,
-
-                child: ListView.separated(itemBuilder: (BuildContext context,index){
-                  return TodoTile(item: todos[index], onDelete: (Todo ) {  }, onPressed: (Todo ) {  },);
-                }, separatorBuilder: (BuildContext context,index){
-                  return Divider();
-                }, itemCount: todos.length)
-
-              ),
-
-
+                height: MediaQuery.of(context).size.height * 0.8,
+                child: ListView.separated(
+                    itemBuilder: (BuildContext context, index) {
+                      return Card(
+                          child: ListTile(
+                        title: Text(todos[index].title),
+                        subtitle: Text(todos[index].description),
+                        onTap: () {},
+                      ));
+                    },
+                    separatorBuilder: (BuildContext context, index) {
+                      return Divider();
+                    },
+                    itemCount: todos.length)),
           ],
         ),
-
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        print("add");
-        navigateToNextPage(context, AddTodoView());
-      },
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print("add");
+          navigateToNextPage(context, AddTodoView());
+        },
         child: Icon(Icons.add),
       ),
     );
   }
 
-
-  getTodo() async{
-    DatabaseClient().allTodos().then((value){
+  getTodo() async {
+    DatabaseClient().allTodos().then((value) {
       print(value);
       setState(() {
-        this.todos=value;
+        this.todos = value;
       });
-
-
     });
   }
-
 }

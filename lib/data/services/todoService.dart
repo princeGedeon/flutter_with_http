@@ -60,12 +60,15 @@ class ToDoService {
   }
 
   static Future<Todo> patch(id, data) async {
+    Fluttertoast.showToast(msg: "Patientez");
     final prefs = await SharedPreferences.getInstance();
     final String token = prefs.getString(Constant.TOKEN_PREF_KEY) ?? '';
 
     var response = await Dio().patch(Constant.BASE_URL + 'todos/' + id,
         data: data,
         options: Options(headers: {"authorization": "Bearer $token"}));
+    Fluttertoast.showToast(
+        backgroundColor: Colors.green, msg: "Tâche démarée !");
 
     return Todo.fromJson(response.data);
   }
