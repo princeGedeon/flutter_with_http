@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tpcoursapi/components/TodoTile.dart';
 import 'package:tpcoursapi/components/app_text.dart';
 import 'package:tpcoursapi/data/models/todo.dart';
 import 'package:tpcoursapi/screens/addTodo.dart';

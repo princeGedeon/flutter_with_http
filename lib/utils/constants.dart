@@ -63,7 +63,3 @@ Drawer myDrawer(BuildContext context) => Drawer(
       ],
     ));
 bool isloading_home = true;
-String edit_title = "";
-String edit_description = "";
-String edit_priority = "";
-String edit_id = "";

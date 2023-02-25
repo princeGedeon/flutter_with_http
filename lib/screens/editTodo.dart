@@ -11,7 +11,8 @@ import '../data/models/todo.dart';
 import '../data/services/DatabaseClient.dart';
 
 class EditTodoView extends StatefulWidget {
-  EditTodoView({Key? key}) : super(key: key);
+  EditTodoView({Key? key,required this.task}) : super(key: key);
+  Todo task;
 
   @override
   State<EditTodoView> createState() => _EditTodoViewState();
@@ -74,19 +75,19 @@ class _EditTodoViewState extends State<EditTodoView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         AppInputv2(
-                            label: "Title",
-                            initialValue: edit_title,
+                            label: "Titre",
+                            initialValue: widget.task.title,
                             controller: titleController,
                             validationBuilder: ValidationBuilder()),
                         AppInputv2(
                             label: "Description",
-                            initialValue: edit_description,
+                            initialValue: widget.task.description,
                             maxlines: 5,
                             controller: descriptionController,
                             validationBuilder: ValidationBuilder()),
                         AppInputv2(
-                            label: "priority",
-                            initialValue: edit_priority,
+                            label: "Priorité",
+                            initialValue: widget.task.priority,
                             controller: priotity,
                             validationBuilder: ValidationBuilder()),
                         SizedBox(
@@ -127,7 +128,7 @@ class _EditTodoViewState extends State<EditTodoView> {
     print(map);
     Todo todo = Todo.fromJson(map);
     print("h");
-    ToDoService.patch(edit_id, map);
+    ToDoService.patch(widget.task.id, map);
     DatabaseClient()
         .addTodoList(todo)
         .then((value) => /* Navigator.of(context).pop() */ {});

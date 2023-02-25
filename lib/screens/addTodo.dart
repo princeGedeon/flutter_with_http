@@ -76,7 +76,7 @@ class _AddTodoViewState extends State<AddTodoView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         AppInputv2(
-                            label: "Title",
+                            label: "Titre",
                             controller: titleController,
                             validationBuilder: ValidationBuilder()),
                         AppInputv2(
@@ -85,7 +85,7 @@ class _AddTodoViewState extends State<AddTodoView> {
                             controller: descriptionController,
                             validationBuilder: ValidationBuilder()),
                         AppInputv2(
-                            label: "priority",
+                            label: "Priorité",
                             controller: priotity,
                             validationBuilder: ValidationBuilder()),
                         SizedBox(
@@ -135,12 +135,13 @@ class _AddTodoViewState extends State<AddTodoView> {
     print("hi");
     FocusScope.of(context).requestFocus(FocusNode());
     if (titleController.text.isEmpty) return;
+    if (my_date == "") return;
     Map<String, dynamic> map = {};
     Random random = new Random();
     map["title"] = titleController.text;
     map["description"] = descriptionController.text;
     map["priority"] = priotity.text;
-    map["deadline_at"] = "2022-12-10 12:00:00";
+    map["deadline_at"] = my_date;
 
     //if (imagPath!=null) map["image"]=imagPath!;
 
@@ -151,7 +152,10 @@ class _AddTodoViewState extends State<AddTodoView> {
     DatabaseClient()
         .addTodoList(todo)
         .then((value) => /* Navigator.of(context).pop() */ {});
-    navigateToNextPage(context, TodoListAPI());
+    navigateToNextPage(
+      context,
+      TodoListAPI(),
+    );
     print("f");
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tpcoursapi/data/models/todo.dart';
 
 import '../utils/app_func.dart';
 
 class DetailTodo extends StatefulWidget {
-  const DetailTodo({Key? key}) : super(key: key);
+  DetailTodo({Key? key,required this.task}) : super(key: key);
+  Todo task;
 
   @override
   State<DetailTodo> createState() => _DetailTodoState();
@@ -18,7 +20,9 @@ class _DetailTodoState extends State<DetailTodo> {
       height: getSize(context).height,
       child: Column(
         mainAxisSize: MainAxisSize.max,
-        children: [],
+        children: [
+          
+        ],
       ),
     ));
   }
