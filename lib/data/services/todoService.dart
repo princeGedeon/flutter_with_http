@@ -29,6 +29,7 @@ class ToDoService {
           queryParameters: queryParameters,
           options: Options(headers: {"authorization": "Bearer $token"}));
       print("RÉPONSE ${response}");
+      isloading_home = false;
     } catch (e, s) {
       print("Exception $e");
       print("StackTrace $s");

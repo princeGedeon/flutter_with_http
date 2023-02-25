@@ -62,3 +62,4 @@ Drawer myDrawer(BuildContext context) => Drawer(
         Divider(),
       ],
     ));
+  bool isloading_home = true;

@@ -15,8 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isloading = true;
-  var myTasks;
+  var myTasks = [];
   String nbr = "...";
   @override
   void initState() {
@@ -29,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
     myTasks = await ToDoService.fetch();
     setState(() {
       nbr = myTasks.length.toString();
-      isloading = false;
     });
   }
 
@@ -41,22 +39,28 @@ class _HomeScreenState extends State<HomeScreen> {
         nbr_finished = 0,
         nbr_lately_finished = 0,
         nbr_non_started = 0;
-    for (Todo task in myTasks) {
-      if (task.begined_at != null) {
-        nbr_started++;
 
-        if (task.finished_at != null) {
-          nbr_finished++;
-          var finished = DateTime.parse(task.finished_at!);
-          var deadline = DateTime.parse(task.deadline_at);
+    if (!isloading_home) {
+      for (Todo task in myTasks) {
+        if (task.begined_at != null) {
+          nbr_started++;
 
-          if (finished.compareTo(deadline) > 0) {
-            nbr_lately_finished++;
+          if (task.finished_at != null) {
+            nbr_finished++;
+            var finished = DateTime.parse(task.finished_at!);
+            var deadline = DateTime.parse(task.deadline_at);
+
+            if (finished.compareTo(deadline) > 0) {
+              nbr_lately_finished++;
+            }
           }
+        } else {
+          nbr_non_started++;
         }
-      } else {
-        nbr_non_started++;
       }
+      setState(() {
+        isloading_home = false;
+      });
     }
 
     return Scaffold(
@@ -69,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Icon(Icons.add),
       ),
-      body: (!isloading)
+      body: (!isloading_home)
           ? SingleChildScrollView(
               child: Center(
                 child: Column(

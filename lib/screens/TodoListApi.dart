@@ -34,11 +34,10 @@ class _TodoListAPIState extends State<TodoListAPI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Accueil")),
+      appBar: AppBar(title: Text("Vos tâches")),
       drawer: myDrawer(context),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print("add");
           navigateToNextPage(context, AddTodoView());
         },
         child: Icon(Icons.add),
