@@ -1,4 +1,4 @@
-class Todo{
+class Todo {
   String id;
   String title;
   String description;
@@ -7,8 +7,14 @@ class Todo{
   String? begined_at;
   String? finished_at;
 
-
-  Todo({required this.id,required this.title,required this.description,required this.priority,required this.deadline_at,  finished_at,  begined_at});
+  Todo(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.priority,
+      required this.deadline_at,
+      required this.finished_at,
+      required this.begined_at});
 
   Map<String, dynamic> toMap() {
     return {
@@ -24,7 +30,7 @@ class Todo{
 
   factory Todo.fromJson(Map<String, dynamic> json) {
     return Todo(
-      id: json["id"].toString() ,
+      id: json["id"].toString(),
       title: json["title"],
       description: json["description"],
       priority: json["priority"],

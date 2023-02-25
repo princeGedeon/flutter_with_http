@@ -150,7 +150,7 @@ class _AddTodoViewState extends State<AddTodoView> {
     ToDoService.create(map);
     DatabaseClient()
         .addTodoList(todo)
-        .then((value) => Navigator.of(context).pop());
+        .then((value) => /* Navigator.of(context).pop() */ {});
     navigateToNextPage(context, TodoListAPI());
     print("f");
   }

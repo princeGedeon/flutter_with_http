@@ -68,7 +68,7 @@ class ToDoService {
         data: data,
         options: Options(headers: {"authorization": "Bearer $token"}));
     Fluttertoast.showToast(
-        backgroundColor: Colors.green, msg: "Tâche démarée !");
+        backgroundColor: Colors.green, msg: "Tâche modifiée !");
 
     return Todo.fromJson(response.data);
   }

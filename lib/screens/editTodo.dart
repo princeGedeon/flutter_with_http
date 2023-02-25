@@ -130,7 +130,7 @@ class _EditTodoViewState extends State<EditTodoView> {
     ToDoService.patch(edit_id, map);
     DatabaseClient()
         .addTodoList(todo)
-        .then((value) => Navigator.of(context).pop());
+        .then((value) => /* Navigator.of(context).pop() */ {});
     navigateToNextPage(context, TodoListAPI());
     print("f");
   }
