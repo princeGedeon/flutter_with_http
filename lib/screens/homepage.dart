@@ -26,6 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void fetch() async {
     myTasks = await ToDoService.fetch();
+    print("-------------------MY TASK");
+    print(myTasks);
+
     setState(() {
       nbr = myTasks.length.toString();
     });
@@ -44,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
       for (Todo task in myTasks) {
         if (task.begined_at != null) {
           nbr_started++;
+          print("TACHE DEMAEREE TACHE");
 
           if (task.finished_at != null) {
             nbr_finished++;

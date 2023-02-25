@@ -62,7 +62,7 @@ class _AddTodoViewState extends State<AddTodoView> {
                   height: 15,
                 ),
                 Text(
-                  "Ajouter une nouvel tache a faire",
+                  "Ajouter une nouvelle tâche a faire",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.redAccent,
@@ -76,26 +76,6 @@ class _AddTodoViewState extends State<AddTodoView> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        (imagPath == null)
-                            ? Icon(
-                                Icons.camera,
-                                size: 128,
-                              )
-                            : Image.file(File(imagPath!)),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            IconButton(
-                                onPressed: () =>
-                                    takePicture(ImageSource.camera),
-                                icon: Icon(Icons.camera_alt)),
-                            IconButton(
-                                onPressed: () =>
-                                    takePicture(ImageSource.gallery),
-                                icon: Icon(Icons.photo_library_outlined))
-                          ],
-                        ),
                         AppInputv2(
                             label: "Title",
                             controller: titleController,
@@ -129,14 +109,6 @@ class _AddTodoViewState extends State<AddTodoView> {
         ),
       ),
     );
-  }
-
-  takePicture(ImageSource source) async {
-    XFile? xfile = await ImagePicker().pickImage(source: source);
-    if (xfile == null) return;
-    setState(() {
-      imagPath = xfile!.path;
-    });
   }
 
   addPressed() {
