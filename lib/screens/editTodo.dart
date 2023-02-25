@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:tpcoursapi/components/app_inputv2.dart';
@@ -11,7 +12,7 @@ import '../data/models/todo.dart';
 import '../data/services/DatabaseClient.dart';
 
 class EditTodoView extends StatefulWidget {
-  EditTodoView({Key? key,required this.task}) : super(key: key);
+  EditTodoView({Key? key, required this.task}) : super(key: key);
   Todo task;
 
   @override
@@ -22,7 +23,7 @@ class _EditTodoViewState extends State<EditTodoView> {
   late TextEditingController titleController;
   late TextEditingController descriptionController;
   late TextEditingController priotity;
-  String? imagPath;
+  String my_date = "";
 
   @override
   void initState() {
@@ -43,6 +44,7 @@ class _EditTodoViewState extends State<EditTodoView> {
 
   @override
   Widget build(BuildContext context) {
+    String my_date = widget.task.deadline_at;
     return Scaffold(
       appBar: AppBar(title: Text("Modifiez votre tâche")),
       drawer: myDrawer(context),
@@ -90,6 +92,27 @@ class _EditTodoViewState extends State<EditTodoView> {
                             initialValue: widget.task.priority,
                             controller: priotity,
                             validationBuilder: ValidationBuilder()),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              DatePicker.showDateTimePicker(context,
+                                  showTitleActions: true,
+                                  minTime: DateTime(2018, 3, 5),
+                                  maxTime: DateTime(2019, 6, 7),
+                                  onChanged: (date) {
+                                my_date = date.toString();
+                              }, onConfirm: (date) {
+                                my_date = date.toString();
+                              },
+                                  currentTime: DateTime.now(),
+                                  locale: LocaleType.fr);
+                            },
+                            child: Text(
+                              "Choisissez votre deadline",
+                              style: TextStyle(color: Colors.blue),
+                            )),
                         SizedBox(
                           height: 15,
                         ),

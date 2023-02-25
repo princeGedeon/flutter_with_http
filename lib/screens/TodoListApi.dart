@@ -4,6 +4,7 @@ import 'package:tpcoursapi/components/app_text.dart';
 import 'package:tpcoursapi/data/models/todo.dart';
 import 'package:tpcoursapi/data/services/todoService.dart';
 import 'package:tpcoursapi/screens/addTodo.dart';
+import 'package:tpcoursapi/screens/detailTodo.dart';
 import 'package:tpcoursapi/screens/editTodo.dart';
 import 'package:tpcoursapi/utils/app_func.dart';
 import 'package:tpcoursapi/utils/constants.dart';
@@ -54,13 +55,17 @@ class _TodoListAPIState extends State<TodoListAPI> {
 
   ApiTodoTile(Todo item) => Card(
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            navigateToNextPage(context, DetailTodo(task: item));
+          },
           child: Column(
             children: [
               ListTile(
                 enabled: false,
                 title: Text(item.title),
-                subtitle: Text(item.description),
+                subtitle: (item.description.length > 50)
+                    ? Text(item.description.substring(0, 50))
+                    : Text(item.description),
                 onTap: () {},
               ),
               ButtonBar(

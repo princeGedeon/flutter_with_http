@@ -48,7 +48,9 @@ class _TodoListSqlState extends State<TodoListSql> {
                       return Card(
                           child: ListTile(
                         title: Text(todos[index].title),
-                        subtitle: Text(todos[index].description),
+                        subtitle: (todos[index].description.length > 50)
+                            ? Text(todos[index].description.substring(0, 50))
+                            : Text(todos[index].description),
                         onTap: () {},
                       ));
                     },

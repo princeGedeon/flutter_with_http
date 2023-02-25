@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:tpcoursapi/components/app_inputv2.dart';
@@ -23,7 +24,6 @@ class _AddTodoViewState extends State<AddTodoView> {
   late TextEditingController titleController;
   late TextEditingController descriptionController;
   late TextEditingController priotity;
-  String? imagPath;
   String my_date = "";
   @override
   void initState() {
@@ -134,8 +134,14 @@ class _AddTodoViewState extends State<AddTodoView> {
   addPressed() {
     print("hi");
     FocusScope.of(context).requestFocus(FocusNode());
-    if (titleController.text.isEmpty) return;
-    if (my_date == "") return;
+    if (titleController.text.isEmpty ||
+        descriptionController.text.isEmpty ||
+        priotity.text.isEmpty) return;
+    if (my_date == "") {
+      Fluttertoast.showToast(
+          msg: "Précisez une date!", backgroundColor: Colors.red);
+      return;
+    }
     Map<String, dynamic> map = {};
     Random random = new Random();
     map["title"] = titleController.text;
