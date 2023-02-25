@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tpcoursapi/components/app_text.dart';
 import 'package:tpcoursapi/data/models/todo.dart';
 import 'package:tpcoursapi/data/services/todoService.dart';
 import 'package:tpcoursapi/screens/addTodo.dart';
+import 'package:tpcoursapi/screens/loginpage.dart';
 import 'package:tpcoursapi/utils/app_func.dart';
 import 'package:tpcoursapi/utils/constants.dart';
 
@@ -67,7 +69,18 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text("Accueil")),
+      appBar: AppBar(
+        title: Text("Accueil"),
+        actions: [
+          IconButton(
+              onPressed: () async {
+                var pref = await SharedPreferences.getInstance();
+                pref.clear();
+                navigateToNextPage(context, LoginPage(), back: false);
+              },
+              icon: Icon(Icons.logout_outlined))
+        ],
+      ),
       drawer: myDrawer(context),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

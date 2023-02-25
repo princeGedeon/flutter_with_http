@@ -5,8 +5,10 @@ import 'package:tpcoursapi/screens/TodoListSql.dart';
 import 'package:tpcoursapi/screens/homepage.dart';
 import 'package:tpcoursapi/utils/app_func.dart';
 
+import '../screens/postPage.dart';
+
 class Constant {
-  static final BASE_URL = "http://192.168.43.223:3030/";
+  static final BASE_URL = "http://192.168.152.94:3030/";
 
   static const USERNAME_PREF_KEY = "username";
   static const EMAIL_PREF_KEY = "email";
@@ -47,6 +49,16 @@ Drawer myDrawer(BuildContext context) => Drawer(
           ),
           onTap: (() {
             navigateToNextPage(context, TodoListSql());
+          }),
+        ),
+        Divider(),
+        InkWell(
+          child: ListTile(
+            leading: Icon(Icons.info),
+            title: Text("Mes Postes"),
+          ),
+          onTap: (() {
+            navigateToNextPage(context, PostPage());
           }),
         ),
         Divider(),

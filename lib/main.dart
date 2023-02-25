@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tpcoursapi/screens/homepage.dart';
 import 'package:tpcoursapi/screens/loginpage.dart';
+import 'package:tpcoursapi/utils/constants.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  var pref = await SharedPreferences.getInstance();
+  String token = pref.getString(Constant.TOKEN_PREF_KEY) ?? "";
+  String begiPage = token != "" ? "home" : "login";
+  runApp(MyApp(
+    firstPage: begiPage,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key, required this.firstPage});
+  final String firstPage;
 
   // This widget is the root of your application.
   @override
@@ -17,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: firstPage == "login" ? LoginPage() : HomeScreen(),
     );
   }
 }
